@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.gov.sp.fatec.springboot3labiv.entity.Anotacao;
 import br.gov.sp.fatec.springboot3labiv.entity.Autorizacao;
 import br.gov.sp.fatec.springboot3labiv.entity.Usuario;
+import br.gov.sp.fatec.springboot3labiv.repository.AnotacaoRepository;
 import br.gov.sp.fatec.springboot3labiv.repository.AutorizacaoRepository;
 import br.gov.sp.fatec.springboot3labiv.repository.UsuarioRepository;
 
@@ -22,6 +24,9 @@ public class UsuarioService implements IUsuarioService{
 
     @Autowired
     private AutorizacaoRepository autorizacaoRepo;
+
+    @Autowired
+    private AnotacaoRepository anotacaoRepo;
 
     @Transactional
     public Usuario novoUsuario(Usuario usuario) {
@@ -40,8 +45,16 @@ public class UsuarioService implements IUsuarioService{
             }
             usuario.setAutorizacoes(autorizacoes);
         }
+        Set<Anotacao> anotacoes = usuario.getAnotacoes();
+        usuario.setAnotacoes(new HashSet<Anotacao>());
+        usuario = usuarioRepo.save(usuario);
+        for(Anotacao anotacao: anotacoes) {
+            anotacao.setUsuario(usuario);
+            anotacao = anotacaoRepo.save(anotacao);
+            usuario.getAnotacoes().add(anotacao);
+        }
         
-        return usuarioRepo.save(usuario);
+        return usuario;
     }
 
     public List<Usuario> buscarTodosUsuarios() {
