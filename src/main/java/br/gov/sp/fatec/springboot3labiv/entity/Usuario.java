@@ -47,6 +47,7 @@ public class Usuario {
 
     public Usuario() {
         this.autorizacoes = new HashSet<Autorizacao>();
+        this.anotacoes = new HashSet<Anotacao>();
     }
 
     public Long getId() {
