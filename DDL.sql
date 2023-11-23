@@ -60,6 +60,24 @@ create table dcn_dicionario (
   dcn_data_hora_revisado datetime
 );
 
+create table cpm_compromisso (
+  cpm_id bigint primary key auto_increment,
+  cpm_nome varchar(100) not null,
+  cpm_data_hora datetime not null,
+  cpm_duracao_prevista float not null,
+  cpm_cep bigint,
+  cpm_numero int
+);
+
+create table jog_jogo (
+  jog_id bigint primary key auto_increment,
+  jog_titulo varchar(100) not null,
+  jog_estudio varchar(100) not null,
+  jog_data_hora_lancamento datetime not null,
+  jog_classificacao varchar(3),
+  jog_duracao_media float
+);
+
 insert into usr_usuario (usr_nome, usr_senha)
   values ('admin', '$2a$10$i3.Z8Yv1Fwl0I5SNjdCGkOTRGQjGvHjh/gMZhdc3e7LIovAklqM6C');
 insert into aut_autorizacao (aut_nome)
@@ -74,3 +92,11 @@ insert into atv_atividade (atv_enunciado, atv_data_hora_cadastro, atv_data_hora_
 insert into dcn_dicionario (dcn_verbete, dcn_significado, dcn_data_hora_cadastro)
   values ('tupla', 'linha de uma tabela', '2023-10-01 10:00:06'),
   ('tupla', 'conjunto de atributos relacionados', current_timestamp());
+insert into cpm_compromisso (cpm_nome, cpm_data_hora, cpm_duracao_prevista)
+  values ('Dentista', '2023-10-5 16:00:00', 0.5);
+insert into cpm_compromisso (cpm_nome, cpm_data_hora, cpm_duracao_prevista, cpm_cep, cpm_numero)
+  values ('Prova', '2023-10-4 21:25:00', 1.5, 12247014, 1350);
+insert into jog_jogo (jog_titulo, jog_estudio, jog_data_hora_lancamento)
+  values ('God Of War', 'Santa Monica', '2005-3-22 00:00:00');
+insert into jog_jogo (jog_titulo, jog_estudio, jog_data_hora_lancamento, jog_classificacao, jog_duracao_media)
+  values ('Hogwarts Legacy', 'Avalanche', '2023-2-10 00:00:00', '12', 25);
