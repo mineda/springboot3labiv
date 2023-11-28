@@ -78,6 +78,14 @@ create table jog_jogo (
   jog_duracao_media float
 );
 
+create table trm_termostato (
+  trm_id bigint primary key auto_increment,
+  trm_data_hora datetime not null,
+  trm_temperatura float not null,
+  trm_umidade float,
+  trm_particulas float
+);
+
 insert into usr_usuario (usr_nome, usr_senha)
   values ('admin', '$2a$10$i3.Z8Yv1Fwl0I5SNjdCGkOTRGQjGvHjh/gMZhdc3e7LIovAklqM6C');
 insert into aut_autorizacao (aut_nome)
@@ -100,3 +108,6 @@ insert into jog_jogo (jog_titulo, jog_estudio, jog_data_hora_lancamento)
   values ('God Of War', 'Santa Monica', '2005-3-22 00:00:00');
 insert into jog_jogo (jog_titulo, jog_estudio, jog_data_hora_lancamento, jog_classificacao, jog_duracao_media)
   values ('Hogwarts Legacy', 'Avalanche', '2023-2-10 00:00:00', '12', 25);
+insert into trm_termostato (trm_data_hora, trm_temperatura, trm_umidade, trm_particulas)
+  values ('2023-10-24 10:00', 25.4, null, 31.3),
+         ('2023-10-24 11:00', 26.1, 43.2, null);
